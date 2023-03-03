@@ -1,6 +1,11 @@
 # WeGather :star2:
 
-WeGather is a twitter-style forum designed for research groups to share their research updates and daily lifes.
+WeGather is a React MERN Full Stack Social Media App designed for people to share their daily lifes.
+MERN: `MongoDB`, `Express`, `React`, `Node.js`
+
+### Updates - 2023.03.03
+
+- Set up all the pages and ready to deploy.
 
 ### Updates - 2023.03.02 :smile:
 
