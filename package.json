@@ -1,0 +1,24 @@
+{
+  "name": "wegather",
+  "version": "1.0.0",
+  "description": "WeGather is a React MERN Full Stack Social Media App designed for people to share their daily lifes.\r MERN: `MongoDB`, `Express`, `React`, `Node.js`",
+  "main": "index.js",
+  "scripts": {
+    "install-server": "cd backend && npm install",
+    "start-server": "cd backend && node app.js",
+    "install-client": "cd client && npm install",
+    "build-client": "cd client && npm run build",
+    "start-client": "cd client && npm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiaor2/WeGather.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xiaor2/WeGather/issues"
+  },
+  "homepage": "https://github.com/xiaor2/WeGather#readme"
+}

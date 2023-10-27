@@ -25,7 +25,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
   const patchFriend = async () => {
     console.log(`_id: ${_id}, friendId: ${friendId}`);
     const response = await fetch(
-      `http://localhost:3001/users/${_id}/${friendId}`,
+      `${window.env.REACT_APP_URL}/users/${_id}/${friendId}`,
       {
         method: "PATCH",
         headers: {
@@ -45,7 +45,6 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
         <Box
           onClick={() => {
             navigate(`/profile/${friendId}`);
-            navigate(0);
           }}
         >
           <Typography
