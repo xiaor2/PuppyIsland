@@ -38,9 +38,9 @@ export const themeSettings = (mode) => {
         ? {
             // palette values for dark mode
             primary: {
-              dark: colorTokens.primary[200],
-              main: colorTokens.primary[500],
-              light: colorTokens.primary[800],
+              dark: "#d4a373",
+              main: "#D5BDAF",
+              light: colorTokens.grey[700],
             },
             neutral: {
               dark: colorTokens.grey[100],
@@ -53,13 +53,18 @@ export const themeSettings = (mode) => {
               default: colorTokens.grey[900],
               alt: colorTokens.grey[800],
             },
+            nav: {
+              background: "rgba(255, 255, 255, 0.01)",
+              text: "black",              
+              logo: "white",
+            },
           }
         : {
             // palette values for light mode
             primary: {
-              dark: colorTokens.primary[700],
-              main: colorTokens.primary[500],
-              light: colorTokens.primary[50],
+              dark: "#d4a373",
+              main: "#D5BDAF",
+              light: "#EDEDE9",
             },
             neutral: {
               dark: colorTokens.grey[700],
@@ -72,33 +77,38 @@ export const themeSettings = (mode) => {
               default: colorTokens.grey[10],
               alt: colorTokens.grey[0],
             },
+            nav: {
+              background: "rgba(255, 255, 255, 0.01)",
+              text: "black",
+              logo: "white",
+            },
           }),
     },
     typography: {
-      fontFamily: ["Rubik", "sans-serif"].join(","),
+      fontFamily: ["Josefin Sans", "sans-serif"].join(","),
       fontSize: 12,
       h1: {
-        fontFamily: ["Rubik", "sans-serif"].join(","),
+        fontFamily: ["Josefin Sans", "sans-serif"].join(","),
         fontSize: 40,
       },
       h2: {
-        fontFamily: ["Rubik", "sans-serif"].join(","),
+        fontFamily: ["Josefin Sans", "sans-serif"].join(","),
         fontSize: 32,
       },
       h3: {
-        fontFamily: ["Rubik", "sans-serif"].join(","),
+        fontFamily: ["Josefin Sans", "sans-serif"].join(","),
         fontSize: 24,
       },
       h4: {
-        fontFamily: ["Rubik", "sans-serif"].join(","),
+        fontFamily: ["Josefin Sans", "sans-serif"].join(","),
         fontSize: 20,
       },
       h5: {
-        fontFamily: ["Rubik", "sans-serif"].join(","),
+        fontFamily: ["Josefin Sans", "sans-serif"].join(","),
         fontSize: 16,
       },
       h6: {
-        fontFamily: ["Rubik", "sans-serif"].join(","),
+        fontFamily: ["Josefin Sans", "sans-serif"].join(","),
         fontSize: 14,
       },
     },

@@ -1,11 +1,11 @@
 import {
   EditOutlined,
   DeleteOutlined,
-  AttachFileOutlined,
-  GifBoxOutlined,
+  // AttachFileOutlined,
+  // GifBoxOutlined,
   ImageOutlined,
-  MicOutlined,
-  MoreHorizOutlined,
+  // MicOutlined,
+  // MoreHorizOutlined,
 } from "@mui/icons-material";
 import {
   Box,
@@ -15,7 +15,7 @@ import {
   useTheme,
   Button,
   IconButton,
-  useMediaQuery,
+  // useMediaQuery,
 } from "@mui/material";
 import FlexBetween from "components/FlexBetween";
 import Dropzone from "react-dropzone";
@@ -34,7 +34,7 @@ const MyPostWidget = ({ picturePath }) => {
   const { palette } = useTheme();
   const { _id } = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
-  const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
+  // const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
   const mediumMain = palette.neutral.mediumMain;
   const medium = palette.neutral.medium;
   const navigate = useNavigate();
@@ -66,7 +66,7 @@ const MyPostWidget = ({ picturePath }) => {
       <FlexBetween gap="1.5rem">
         <UserImage image={picturePath} />
         <InputBase
-          placeholder="What's on your mind..."
+          placeholder="Share the daily life of your cute puppy!"
           onChange={(e) => setPost(e.target.value)}
           value={post}
           sx={{
@@ -135,7 +135,7 @@ const MyPostWidget = ({ picturePath }) => {
           </Typography>
         </FlexBetween>
 
-        {isNonMobileScreens ? (
+        {/* {isNonMobileScreens ? (
           <>
             <FlexBetween gap="0.25rem">
               <GifBoxOutlined sx={{ color: mediumMain }} />
@@ -156,7 +156,7 @@ const MyPostWidget = ({ picturePath }) => {
           <FlexBetween gap="0.25rem">
             <MoreHorizOutlined sx={{ color: mediumMain }} />
           </FlexBetween>
-        )}
+        )} */}
 
         <Button
           disabled={!post}

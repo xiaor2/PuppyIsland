@@ -2,7 +2,7 @@ import {
   ChatBubbleOutlineOutlined,
   FavoriteBorderOutlined,
   FavoriteOutlined,
-  ShareOutlined,
+  // ShareOutlined,
 } from "@mui/icons-material";
 import { Box, Divider, IconButton, Typography, useTheme } from "@mui/material";
 import FlexBetween from "components/FlexBetween";
@@ -91,9 +91,9 @@ const PostWidget = ({
           </FlexBetween>
         </FlexBetween>
 
-        <IconButton>
+        {/* <IconButton>
           <ShareOutlined />
-        </IconButton>
+        </IconButton> */}
       </FlexBetween>
       {isComments && (
         <Box mt="0.5rem">
