@@ -11,6 +11,7 @@ import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
 import postRoutes from "./routes/posts.js";
+import commentRoutes from "./routes/comments.js";
 import { register } from "./controllers/auth.js";
 import { createPost } from "./controllers/posts.js";
 import { verifyToken } from "./middleware/auth.js";
@@ -19,13 +20,20 @@ import { verifyToken } from "./middleware/auth.js";
 // import { users, posts } from "./data/index.js"
 
 // Configurations
+// __filename in your Node.js script to refer to the path of the currently executing file.
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// __dirname will hold the directory path where the current JavaScript file is located.
+const __dirname = path.dirname(__filename); 
 dotenv.config();
 const app = express();
+// you're telling your Express application to automatically parse incoming JSON data 
+// from HTTP POST and PUT requests and make it available in your route handlers as req.body.
 app.use(express.json());
+// automatically set appropriate security headers in the HTTP responses and 
+// apply various security policies, helping to make your web application more secure.
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
+// log HTTP request information to the console or a specified log file.
 app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
@@ -51,6 +59,7 @@ app.post("/posts", verifyToken, upload.single("picture"), createPost);
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
+app.use("/posts/:id/comments", upload.none(), commentRoutes);
 
 // Mongoose Setup
 const PORT = process.env.PORT || 6001;

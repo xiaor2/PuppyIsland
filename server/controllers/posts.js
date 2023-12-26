@@ -28,9 +28,19 @@ export const createPost = async (req, res) => {
 };
 
 // Read
+export const getPost = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.postId).populate('comments');
+    console.log(req.params)
+    res.status(200).json(post);
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+}
+
 export const getFeedPosts = async (req, res) => {
   try {
-    const post = await Post.find();
+    const post = await Post.find().populate('comments');
     res.status(200).json(post);
   } catch (err) {
     res.status(404).json({ message: err.message });
@@ -65,7 +75,7 @@ export const likePost = async (req, res) => {
       id,
       { likes: post.likes },
       { new: true }
-    );
+    ).populate('comments');
 
     res.status(200).json(updatedPost);
   } catch (err) {

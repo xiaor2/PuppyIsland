@@ -4,10 +4,11 @@ import {
   FavoriteOutlined,
   // ShareOutlined,
 } from "@mui/icons-material";
-import { Box, Divider, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, Divider, Button, IconButton, Typography, useTheme, InputBase } from "@mui/material";
 import FlexBetween from "components/FlexBetween";
 import Friend from "components/Friend";
 import WidgetWrapper from "components/WidgetWrapper";
+import UserImage from "components/UserImage";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPost } from "state";
@@ -29,10 +30,39 @@ const PostWidget = ({
   const loggedInUserId = useSelector((state) => state.user._id);
   const isLiked = Boolean(likes[loggedInUserId]);
   const likeCount = Object.keys(likes).length;
+  const [currPost, setCurrPost] = useState("");
 
   const { palette } = useTheme();
   const main = palette.neutral.main;
   const primary = palette.primary.main;
+
+  const handlePost = async () => {
+    const formData = new FormData();
+    formData.append("userId", loggedInUserId);
+    formData.append("comment", currPost);
+
+    await fetch(`${window.env.REACT_APP_URL}/posts/${postId}/comments`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      body: formData,
+    });
+    const response = await fetch(
+      `${window.env.REACT_APP_URL}/posts/${postId}/`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const updatedPost = await response.json();
+    console.log(updatedPost);
+    dispatch(setPost({ post: updatedPost }));
+    setCurrPost("")
+  };
 
   const patchLike = async () => {
     const response = await fetch(
@@ -101,11 +131,36 @@ const PostWidget = ({
             <Box key={`${name}-${i}`}>
               <Divider />
               <Typography sx={{ color: main, m: "0.5rem 0", pl: "1rem" }}>
-                {comment}
+                {comment.content}
               </Typography>
             </Box>
           ))}
           <Divider />
+          <FlexBetween gap="1.5rem" p="1rem">
+            <UserImage image={userPicturePath} />
+            <InputBase
+              placeholder="Leave your comment!"
+              onChange={(e) => setCurrPost(e.target.value)}
+              value={currPost}
+              sx={{
+                width: "100%",
+                backgroundColor: palette.neutral.light,
+                borderRadius: "1rem",
+                padding: "1rem 2rem",
+              }}
+            />
+            <Button
+              disabled={!currPost}
+              onClick={handlePost}
+              sx={{
+                color: palette.background.alt,
+                backgroundColor: palette.primary.main,
+                borderRadius: "3rem",
+              }}
+            >
+              POST
+            </Button>
+          </FlexBetween>
         </Box>
       )}
     </WidgetWrapper>
