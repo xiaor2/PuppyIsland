@@ -24,9 +24,11 @@ export const createComment = async (req, res) => {
 // Delete
 export const deleteComment = async (req, res) => {
   try {
-    const {id, reviewId} = req.params
-    await Campground.findByIdAndUpdate(id, {$pull: {reviews: reviewId}})
-    await Review.findByIdAndDelete(reviewId)
+    const {id, commentId} = req.params
+    await Post.findByIdAndUpdate(id, {$pull: {comments: commentId}})
+    await Comment.findByIdAndDelete(commentId)
+    const post = await Post.findById(id).populate('comments')
+    res.status(200).json(post)
   } catch (err) {
     res.status(204).json({ message: err.message })
   }

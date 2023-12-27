@@ -4,6 +4,7 @@ import {
   FavoriteOutlined,
   // ShareOutlined,
 } from "@mui/icons-material";
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { Box, Divider, Button, IconButton, Typography, useTheme, InputBase } from "@mui/material";
 import FlexBetween from "components/FlexBetween";
 import Friend from "components/Friend";
@@ -28,6 +29,7 @@ const PostWidget = ({
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
   const loggedInUserId = useSelector((state) => state.user._id);
+  const loggedInUserPicturePath = useSelector((state) => state.user.picturePath)
   const isLiked = Boolean(likes[loggedInUserId]);
   const likeCount = Object.keys(likes).length;
   const [currPost, setCurrPost] = useState("");
@@ -59,10 +61,22 @@ const PostWidget = ({
       }
     );
     const updatedPost = await response.json();
-    console.log(updatedPost);
+    // console.log(updatedPost);
     dispatch(setPost({ post: updatedPost }));
     setCurrPost("")
   };
+
+  const handleDelete = async (id) => {
+    const response = await fetch(`${window.env.REACT_APP_URL}/posts/${postId}/comments/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      }
+    })
+    const updatedPost = await response.json();
+    dispatch(setPost({ post: updatedPost }));
+  }
 
   const patchLike = async () => {
     const response = await fetch(
@@ -128,16 +142,24 @@ const PostWidget = ({
       {isComments && (
         <Box mt="0.5rem">
           {comments.map((comment, i) => (
-            <Box key={`${name}-${i}`}>
+            <>
               <Divider />
-              <Typography sx={{ color: main, m: "0.5rem 0", pl: "1rem" }}>
-                {comment.content}
-              </Typography>
-            </Box>
+              <FlexBetween>
+                <Box key={`${name}-${i}`}>
+                  <Typography sx={{ color: main, m: "0.75rem 0", pl: "1rem", }}>
+                    {comment.content}
+                  </Typography>
+                </Box>
+                {loggedInUserId === comment.author ?
+                  <IconButton onClick={() => handleDelete(comment._id)}>
+                    <DeleteOutlineIcon />
+                  </IconButton> : null}
+              </FlexBetween>
+            </>
           ))}
           <Divider />
           <FlexBetween gap="1.5rem" p="1rem">
-            <UserImage image={userPicturePath} />
+            <UserImage image={loggedInUserPicturePath} />
             <InputBase
               placeholder="Leave your comment!"
               onChange={(e) => setCurrPost(e.target.value)}
