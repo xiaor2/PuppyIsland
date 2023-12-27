@@ -57,6 +57,7 @@ const MyPostWidget = ({ picturePath }) => {
     console.log(posts);
     dispatch(setPosts({ posts }));
     setImage(null);
+    setIsImage(false);
     setPost("");
     navigate("/home");
   };
