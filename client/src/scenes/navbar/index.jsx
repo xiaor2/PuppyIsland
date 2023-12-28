@@ -11,7 +11,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import {
-  Search,
+  // Search,
   // Message,
   DarkMode,
   LightMode,
@@ -58,7 +58,7 @@ const Navbar = () => {
         >
           Puppy Island
         </Typography>
-        {isNonMobileScreens && (
+        {/* {isNonMobileScreens && (
           <FlexBetween
             backgroundColor={neutralLight}
             borderRadius="9px"
@@ -70,7 +70,7 @@ const Navbar = () => {
               <Search />
             </IconButton>
           </FlexBetween>
-        )}
+        )} */}
       </FlexBetween>
 
       {/* Desktop Nav */}
